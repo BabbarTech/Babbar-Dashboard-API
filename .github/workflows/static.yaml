@@ -1,0 +1,32 @@
+name: Static Analysis
+
+on: [push]
+
+jobs:
+  phpstan:
+    name: phpstan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          coverage: none
+
+      - name: Install composer dependencies
+        run: composer install -n --prefer-dist
+
+      - name: Install libraries
+        run: |
+          composer update
+          composer require nunomaduro/larastan:^2.0 --dev
+          composer require --dev phpstan/phpstan
+          composer require --dev dominikb/composer-license-checker
+
+      - name: Avoid GPL dependencies
+        run: ./vendor/bin/composer-license-checker check --blocklist GPL
+
+      - name: Run Static Analysis
+        run: ./vendor/bin/phpstan analyse app --error-format=github --level 9

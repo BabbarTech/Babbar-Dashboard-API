@@ -1,0 +1,62 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "vue-multiselect/dist/vue-multiselect.min.css";
+
+$tag-margin: 3px;
+$tag-color: #428bca;
+
+.multiselect {
+    color: $input-color;
+    font-size: $input-font-size;
+
+    .multiselect__tags {
+        background: #f8fafc !important;
+        border-color: $input-border-color;
+        border-radius: $input-border-radius;
+        font-size: $input-font-size;
+        padding: $input-padding-y $input-padding-x;
+        min-height: unset;
+
+        .multiselect__tag {
+            background-color: $tag-color;
+            margin-top: $tag-margin;
+            margin-bottom: -$tag-margin;
+            padding: 7px 26px 7px 10px;
+
+            &-icon {
+                &:after {
+                    color: $light;
+                }
+
+                &:hover {
+                    background: darken($tag-color, 5%);
+                }
+            }
+        }
+
+        .multiselect__placeholder {
+            margin-bottom: 0;
+            color: $input-placeholder-color;
+            padding: 0;
+        }
+
+        .multiselect__input, .multiselect__single {
+            line-height: $input-line-height;
+            background: #f8fafc !important;
+            margin-bottom: 0;
+        }
+    }
+
+    .multiselect__select {
+        background: none !important;
+    }
+
+    .multiselect__option--highlight {
+        background-color: $tag-color;
+    }
+}
+
+.multiselect--disabled {
+    background: none !important;
+}

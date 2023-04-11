@@ -1,0 +1,25 @@
+// Body
+$body-bg: #f8fafc;
+$color-babbar-light: #00afff;
+$color-babbar-dark: #202890;
+
+$info: #78c7ec;
+
+// Typography
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$font-family-sans-serif:
+    'Nunito Sans',
+    Roboto,
+        // Basic web fallback
+    "Helvetica Neue", Arial,
+        // Linux
+    "Noto Sans",
+    "Liberation Sans",
+        // Sans serif fallback
+    sans-serif,
+        // Emoji fonts
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$popover-max-width: 400px;
