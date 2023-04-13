@@ -1,0 +1,74 @@
+version: '3'
+services:
+    trafilatura:
+        image: babbartech/trafilatura:latest
+        ports:
+          - "5000"
+        networks:
+            - audit
+    auditapp:
+        image: babbartech/babbar-dashboard-api:latest
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-8080}:80'
+        environment:
+            MYSQL_USER: 'root'
+            MYSQL_PASSWORD: 'mypassword'
+        networks:
+            - audit
+        depends_on:
+            mariadb:
+                condition: service_healthy
+            redis:
+                condition: service_started
+            trafilatura:
+                condition: service_started
+            mailhog:
+                condition: service_started
+    mariadb:
+        image: 'mariadb:10'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'mypassword'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'audit-seo'
+            MYSQL_USER: 'myuser'
+            MYSQL_PASSWORD: 'mypassword'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'audit-mariadb:/var/lib/mysql'
+        networks:
+            - audit
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-pmypassword"]
+            retries: 3
+            timeout: 5s
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '6379'
+        volumes:
+            - 'audit-redis:/data'
+        networks:
+            - audit
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - '1025'
+            - '8025'
+        networks:
+            - audit
+networks:
+    audit:
+        driver: bridge
+volumes:
+    audit-mariadb:
+        driver: local
+    audit-redis:
+        driver: local

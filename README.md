@@ -4,8 +4,29 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PHPStan: Level 9](https://img.shields.io/badge/PHPStan-level%209-brightgreen.svg?style=flat)](https://github.com/BabbarTech/Babbar-Dashboard-API/actions)
 
-## Installation
-Télécharger le code source et décompresser l'archive.
+## Lancement avec Docker
+
+Le plus simple pour utiliser le service c'est de le lancer via docker compose
+
+```
+docker compose -f ./docker/docker-compose.yml up
+```
+
+Par défaut, le service est disponible sur : http://localhost:8080
+
+## Build des images dockers
+
+Image du dashboard :
+```
+docker build . -t babbar-dashboard-api:latest -f ./docker/prod/Dockerfile
+```
+
+Image de trafilatura :
+```
+docker build . -t babbar-trafilatura:latest -f ./docker/trafilatura/Dockerfile
+```
+
+## Installation pour les développeurs
 
 Aller à la racine du projet et lancer le script d'installation
 

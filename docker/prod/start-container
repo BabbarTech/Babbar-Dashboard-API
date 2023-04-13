@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+sed -i "s/<MYSQL_USER>/${MYSQL_USER}/g" /var/www/html/.env
+sed -i "s/<MYSQL_PASSWORD>/${MYSQL_PASSWORD}/g" /var/www/html/.env
+
+if [ ! -d /.composer ]; then
+    mkdir /.composer
+fi
+
+chmod -R ugo+rw /.composer
+
+php artisan migrate --path=database/migrations/landlord --database=landlord --force
+
+RUN chown -R sail:sail /var/www/html/*
+
+if [ $# -gt 0 ]; then
+    exec gosu $WWWUSER "$@"
+else
+    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+fi
+
