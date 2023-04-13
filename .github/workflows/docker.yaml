@@ -5,9 +5,6 @@ on:
     branches:
       - "main"
 
-env:
-  LATEST_TAG: babbartech/babbar-dashboard-api:latest
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -28,10 +25,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and export to Docker
+        name: Build and export dashboard to Docker
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./docker/prod/Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.LATEST_TAG }}
+          tags: babbartech/babbar-dashboard-api:latest
+      -
+        name: Build and export trafilatura to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./docker/trafilatura/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: babbartech/trafilatura:latest
