@@ -27,16 +27,16 @@ services:
             mailhog:
                 condition: service_started
     mariadb:
-        image: 'mariadb:10'
+        image: 'mariadb:10.7'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            MYSQL_ROOT_PASSWORD: 'mypassword'
-            MYSQL_ROOT_HOST: "%"
-            MYSQL_DATABASE: 'audit-seo'
-            MYSQL_USER: 'myuser'
-            MYSQL_PASSWORD: 'mypassword'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MARIADB_ROOT_PASSWORD: 'mypassword'
+            MARIADB_ROOT_HOST: "%"
+            MARIADB_DATABASE: 'audit-seo'
+            MARIADB_USER: 'myuser'
+            MARIADB_PASSWORD: 'mypassword'
+            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
         volumes:
             - 'audit-mariadb:/var/lib/mysql'
         networks:
@@ -46,7 +46,7 @@ services:
             retries: 3
             timeout: 5s
     redis:
-        image: 'redis:alpine'
+        image: 'redis:7-alpine'
         ports:
             - '6379'
         volumes:
