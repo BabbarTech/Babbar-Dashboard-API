@@ -4,9 +4,24 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PHPStan: Level 9](https://img.shields.io/badge/PHPStan-level%209-brightgreen.svg?style=flat)](https://github.com/BabbarTech/Babbar-Dashboard-API/actions)
 
+## A SAVOIR AVANT D'INSTALLER L'OUTIL
+
+Le Babbar Dashboard API (BDA) est un outil d'aide à l'audit de sites web qui utilise les APIs babbar.tech et yourtext.guru.
+Si vous n'avez aucune des deux APIs l'outil ne fonctionne pas.
+
+Pour en savoir plus sur les deux APIs :
+
+https://www.babbar.tech/settings#/api
+
+https://yourtext.guru/profil/api
+
 ## Lancement avec Docker
 
-Le plus simple pour utiliser le service c'est de le lancer via docker compose
+Utilisateur ou développeur ?
+
+ATTENTION, si vous êtes un "simple" utilisateur, vous devez utiliser le fichier [docker-compose.yml](docker%2Fdocker-compose.yml) qui se trouve dans le repertoire docker de ce repository. Pas celui qui est à la racine !
+
+C'est ce fichier qui est utilisé pour lancer le service avec la commande :
 
 ```
 docker compose -f ./docker/docker-compose.yml up
@@ -27,6 +42,8 @@ docker build . -t babbar-trafilatura:latest -f ./docker/trafilatura/Dockerfile
 ```
 
 ## Installation pour les développeurs
+
+Pour les développeurs, il est possible d'utiliser le fichier docker-compose à la racine comme avec un projet Laravel classique.
 
 Aller à la racine du projet et lancer le script d'installation
 
