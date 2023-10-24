@@ -18,14 +18,14 @@ enum SerpEnum: string
     use HasDropDownOptionTrait;
 
     case fr_FR = 'fr_FR';
-    case en_UK = 'en_UK';
+    case en_GB = 'en_GB';
     case es_ES = 'es_ES';
 
     public function label(): string
     {
         return match ($this) {
             self::fr_FR => 'Google FR',
-            self::en_UK => 'Google UK',
+            self::en_GB => 'Google GB',
             self::es_ES => 'Google ES',
         };
     }
@@ -34,7 +34,7 @@ enum SerpEnum: string
     {
         return match ($this) {
             self::fr_FR => 'fr',
-            self::en_UK => 'en',
+            self::en_GB => 'en',
             self::es_ES => 'es',
         };
     }
@@ -43,7 +43,7 @@ enum SerpEnum: string
     {
         return match ($this) {
             self::fr_FR => 'FR',
-            self::en_UK => 'UK',
+            self::en_GB => 'GB',
             self::es_ES => 'ES',
         };
     }
@@ -51,7 +51,7 @@ enum SerpEnum: string
     public function yourTextGuruLang(): string{
         return match ($this) {
             self::fr_FR => 'fr_fr',
-            self::en_UK => 'en_gb',
+            self::en_GB => 'en_gb',
             self::es_ES => 'es_es',
         };
     }
