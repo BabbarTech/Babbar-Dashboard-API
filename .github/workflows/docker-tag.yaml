@@ -1,0 +1,44 @@
+name: Docker Hub
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  docker-tag:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Build
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and export dashboard to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./docker/prod/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: babbartech/babbar-dashboard-api:${{  github.ref_name }}
+      -
+        name: Build and export trafilatura to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./docker/trafilatura/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: babbartech/trafilatura:${{  github.ref_name }}
