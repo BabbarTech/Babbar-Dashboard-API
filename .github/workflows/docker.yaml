@@ -4,30 +4,11 @@ on:
   push:
     branches:
       - "main"
-    tags:
-      - '*'
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Vérifier la branche ou le tag
-        run: |
-          if [ -n "$GITHUB_REF" ]; then
-            if [[ "$GITHUB_REF" == refs/tags/* ]]; then
-              export IMAGE_TAG=${GITHUB_REF#refs/tags/}
-              echo "Create tag : $GITHUB_REF use tag $IMAGE_TAG"
-            else
-              echo "push on : $GITHUB_REF use tag latest"
-              export IMAGE_TAG=latest
-            fi
-          else
-            echo "No tag define"
-            exit 1
-          fi
-        env:
-          GITHUB_REF: ${{ github.ref }}
       -
         name: Checkout
         uses: actions/checkout@v3
@@ -51,9 +32,7 @@ jobs:
           file: ./docker/prod/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: babbartech/babbar-dashboard-api:${{IMAGE_TAG}}
-        env:
-          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+          tags: babbartech/babbar-dashboard-api:latest
       -
         name: Build and export trafilatura to Docker
         uses: docker/build-push-action@v4
@@ -62,6 +41,4 @@ jobs:
           file: ./docker/trafilatura/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: babbartech/trafilatura:${{IMAGE_TAG}}
-        env:
-          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+          tags: babbartech/trafilatura:latest
