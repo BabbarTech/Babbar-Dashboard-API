@@ -13,6 +13,18 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Docker meta dashboard
+        id: metadash
+        uses: docker/metadata-action@v5
+        with:
+          images: babbartech/babbar-dashboard-api
+      -
+        name: Docker meta trafilatura
+        id: metatra
+        uses: docker/metadata-action@v5
+        with:
+          images: babbartech/trafilatura
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       -
@@ -32,7 +44,8 @@ jobs:
           file: ./docker/prod/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: babbartech/babbar-dashboard-api:latest
+          tags: ${{ steps.metadash.outputs.tags }}
+          labels: ${{ steps.metadash.outputs.labels }}
       -
         name: Build and export trafilatura to Docker
         uses: docker/build-push-action@v4
@@ -41,4 +54,5 @@ jobs:
           file: ./docker/trafilatura/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: babbartech/trafilatura:latest
+          tags: ${{ steps.metatra.outputs.tags }}
+          labels: ${{ steps.metatra.outputs.labels }}
