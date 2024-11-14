@@ -27,7 +27,7 @@ jobs:
         run: |
           composer update
           composer require nunomaduro/larastan:^2.0 --dev
-          composer require --dev phpstan/phpstan:1.10.14
+          composer require --dev phpstan/phpstan:^1.12
           composer require --dev dominikb/composer-license-checker
 
       - name: Avoid GPL dependencies
