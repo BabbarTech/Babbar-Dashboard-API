@@ -11,5 +11,5 @@ parameters:
         - identifier: missingType.iterableValue
         - identifier: argument.type
         - identifier: return.missing
-        - 'Unable to resolve the template type TGroupKey in call to method Illuminate\Support\Collection<(int|string),mixed>::groupBy()'
+        - '/Unable to resolve the template type TGroupKey in call to method Illuminate\\Support\\Collection<\(int\|string\),mixed>::groupBy\(\)/'
 
