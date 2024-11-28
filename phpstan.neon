@@ -11,4 +11,5 @@ parameters:
         - identifier: missingType.iterableValue
         - identifier: argument.type
         - identifier: return.missing
+        - 'Unable to resolve the template type .* in call to method .*'
 
