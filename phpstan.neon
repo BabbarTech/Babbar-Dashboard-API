@@ -9,5 +9,6 @@ parameters:
 
     excludePaths:
 
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+    	- missingType.iterableValue
+    	- missingType.generics
