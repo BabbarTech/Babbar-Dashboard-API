@@ -8,8 +8,8 @@ parameters:
     level: max
 
     excludePaths:
-
-    ignoreErrors:
-    	missingType:
-    	    - iterableValue
-    	    - generics
+    parameters:
+	    ignoreErrors:
+		    -
+			    identifier: missingType.iterableValue
+			    identifier: missingType.generics
