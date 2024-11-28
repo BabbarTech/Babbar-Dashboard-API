@@ -9,6 +9,5 @@ parameters:
 
     excludePaths:
     ignoreErrors:
-        -
-            identifier: missingType.iterableValue
-            identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
