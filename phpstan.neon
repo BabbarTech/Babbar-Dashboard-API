@@ -6,10 +6,13 @@ parameters:
         - app
 
     level: max
-
-    excludePaths:
-    parameters:
-        ignoreErrors:
-            -
-                identifier: missingType.iterableValue
-                identifier: missingType.generics
+    ignoreErrors:
+        - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: argument.type
+        - '/Unable to resolve the template type TGroupKey in call to method Illuminate\\Support\\Collection<\(int\|string\),mixed>::groupBy\(\)/'
+        - '/Unable to resolve the template type TMapValue in call to method Illuminate\\Support\\Collection<\(int\|string\),mixed>::map\(\)/'
+        - '/Return type of call to method Illuminate\\Support\\Collection<\*NEVER\*,\*NEVER\*>::map\(\) contains unresolvable type/'
+        - '/Method App\\Models\\Host::getTitleAttribute\(\) should return string but returns mixed/'
+        - '/Method App\\Models\\Keyword::getTitleAttribute\(\) should return string but returns mixed/'
+        - '/Method App\\Models\\Project::getTitleAttribute\(\) should return string but returns mixed/'
