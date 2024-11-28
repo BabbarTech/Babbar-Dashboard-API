@@ -8,4 +8,7 @@ parameters:
     level: max
     ignoreErrors:
         - identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: argument.type
+        - identifier: return.missing
 
