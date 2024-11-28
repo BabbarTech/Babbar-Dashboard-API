@@ -6,8 +6,8 @@ parameters:
         - app
 
     level: max
-
-    excludePaths:
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
