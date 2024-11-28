@@ -8,9 +8,4 @@ parameters:
     level: max
     ignoreErrors:
         - identifier: missingType.generics
-        - identifier: missingType.iterableValue
-        - '#Property .* has unknown class missingType\.iterableValue#'
-        - '#Property .* has unknown class missingType\.generics#'
-        - '#Parameter #1 \$value of function intval expects array\|bool\|float\|int\|resource\|string\|null, mixed given#'
-        - '#Parameter #1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, mixed given#'
 
